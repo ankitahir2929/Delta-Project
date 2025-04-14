@@ -29,7 +29,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "/public")));
 
-const dbURL = process.env.ATLASDB_URL;
+// const dbURL = process.env.ATLASDB_URL;
+const dbURL = "mongodb://127.0.0.1:27017/wonderlust";;
 
 main()
   .then(() => {
@@ -84,7 +85,7 @@ app.get("/", (req, res) => {
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
-  res.locals.currUsr = req.user;
+  res.locals.currUsr = req.user || null;
   next();
 });
 
